@@ -165,11 +165,6 @@ const Home = () => {
             </div>
             <span className="font-bold text-slate-700">YT Focus</span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-slate-500">
-            <a href="#" className="hover:text-slate-800 transition-colors">About</a>
-            <a href="#" className="hover:text-slate-800 transition-colors">Privacy</a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-slate-800 transition-colors">GitHub</a>
-          </div>
           <p className="text-xs text-slate-400">© 2025 YT Focus. Built for focused learning.</p>
         </div>
       </footer>
