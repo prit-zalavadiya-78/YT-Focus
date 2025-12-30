@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apply the nicer font globally */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* FLIP CARD UTILITIES */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* Safari support */
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
