@@ -63,6 +63,8 @@ const GoalCard = ({ goal }) => {
             variant={hasStarted ? "default" : "secondary"}
         >
             {hasStarted ? (
+                 completedVideos == totalVideos ?
+                <>Completed</> :
                 <>Continue <PlayCircle className="w-4 h-4" /></>
             ) : (
                 <>Start Learning</>
