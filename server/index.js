@@ -22,7 +22,8 @@ app.use(express.json({ limit: '10mb' }));
 const allowedOrigins = [
   "http://localhost:5173",
   "https://ytfocus.vercel.app",
-  "https://yt-focus-eosin.vercel.app"
+  "https://yt-focus-eosin.vercel.app",
+  "https://yt-focus-psi.vercel.app"
 ];
 
 app.use(cors({
