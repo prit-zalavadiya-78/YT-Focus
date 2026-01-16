@@ -6,10 +6,10 @@ import GoalCard from '../components/Goalcard';
 import CreateGoalModal from '../components/CreateGoalModal';
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { useAuth } from '../context/AuthContext'; // 1. Import useAuth
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
-  const { user } = useAuth(); // 2. Get user from context
+  const { user } = useAuth();
   const [goals, setGoals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-slate-50/50">
-      <Navbar user={user} /> {/* 3. Pass the user prop here! */}
+      <Navbar user={user} /> 
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         {/* Header Section */}
