@@ -10,14 +10,12 @@ const Navbar = ({ user }) => {
   const { logout } = useAuth();
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
 
-  // Optional: Hide navbar on login/signup pages
   if (isAuthPage) return null;
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-slate-50/80 backdrop-blur-md border-b border-slate-200/50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
-        {/* Logo - Goes to landing page */}
         <Link to="/dashboard" className="flex items-center gap-2 group">
           <div className="bg-blue-600 p-2 rounded-lg group-hover:bg-blue-700 transition-colors">
             <Play className="w-5 h-5 text-white fill-current" />
