@@ -5,7 +5,6 @@ import { Play, Loader2, AlertCircle } from 'lucide-react';
 
 const Login = () => {
   const location = useLocation();
-  // Set initial state based on URL - if on /signup, show signup form
   const [isLogin, setIsLogin] = useState(location.pathname !== '/signup');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -15,7 +14,6 @@ const Login = () => {
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
-  // Update isLogin state when URL changes
   useEffect(() => {
     setIsLogin(location.pathname !== '/signup');
   }, [location.pathname]);
@@ -32,19 +30,15 @@ const Login = () => {
     try {
       let result;
 
-      // ✅ FIX: Use the Context functions correctly
-      // We do NOT call api.post here. We let the context handle the API and token saving.
       if (isLogin) {
         result = await login(formData.email, formData.password);
       } else {
         result = await register(formData.name, formData.email, formData.password);
       }
 
-      // Handle the response from Context
       if (result.success) {
         navigate('/dashboard');
       } else {
-        // Show the error message returned by the context
         setError(result.message);
       }
 
