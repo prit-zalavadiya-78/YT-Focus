@@ -3,7 +3,7 @@ import api from "../services/api";
 
 const AuthContext = createContext();
 
-// ✅ THE MISSING EXPORT: Custom hook to use the context
+// Custom hook to use the context
 export const useAuth = () => {
   return useContext(AuthContext);
 };
@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          // If we have a token, fetch the user details
           const { data } = await api.get("/auth/me");
           setUser(data);
         } catch (error) {
