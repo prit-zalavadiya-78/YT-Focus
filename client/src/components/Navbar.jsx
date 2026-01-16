@@ -18,7 +18,7 @@ const Navbar = ({ user }) => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
         {/* Logo - Goes to landing page */}
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link to="/dashboard" className="flex items-center gap-2 group">
           <div className="bg-blue-600 p-2 rounded-lg group-hover:bg-blue-700 transition-colors">
             <Play className="w-5 h-5 text-white fill-current" />
           </div>
