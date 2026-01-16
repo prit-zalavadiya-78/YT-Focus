@@ -9,7 +9,7 @@ import RoadmapView from '../components/RoadmapView';
 import QuizModal from '../components/QuizModal';
 import NotesEditor from '../components/NotesEditor';
 import ConfettiManager from '../components/ConfettiManager';
-import Flashcard from '../components/Flashcard'; // ✅ Import Flashcard
+import Flashcard from '../components/Flashcard'; 
 
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
@@ -82,10 +82,7 @@ const GoalDetail = () => {
   const handleLevelUp = async () => {
     setTriggerConfetti(true);
     try {
-        // Mark video as done in the Goal (this also updates XP and stats in the backend)
         const { data } = await api.patch(`/goals/${goal._id}/progress`, { videoId: currentVideo._id });
-        
-        // Note: XP and stats are updated server-side in goals.js, no need for separate call
 
         setGoal(data);
         const nextVid = data.videos.find(v => v.isCurrent);
@@ -120,7 +117,6 @@ const GoalDetail = () => {
         videoId: currentVideo._id,
         notes: notesContent
       });
-      // Update local state to reflect saved notes
       setGoal(prev => ({
         ...prev,
         videos: prev.videos.map(v => 
@@ -147,7 +143,6 @@ const GoalDetail = () => {
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* LEFT: Video & Tabs */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-black rounded-2xl overflow-hidden shadow-2xl aspect-video">
                {currentVideo?.youtubeId ? (
@@ -194,8 +189,7 @@ const GoalDetail = () => {
               </div>
             </div>
           </div>
-
-          {/* RIGHT: Roadmap */}
+          
           <div className="lg:col-span-1">
              <RoadmapView videos={goal.videos} currentVideoId={currentVideo?._id} onVideoSelect={(id) => setCurrentVideo(goal.videos.find(v => v._id === id))} />
           </div>
