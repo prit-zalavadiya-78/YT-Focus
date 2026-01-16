@@ -15,10 +15,10 @@ import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 
 const GoalDetail = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+
   const [goal, setGoal] = useState(null);
   const [currentVideo, setCurrentVideo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -55,17 +55,18 @@ const GoalDetail = () => {
     setQuizLoading(true);
     setShowQuiz(true);
     try {
-        const { data } = await api.post('/ai/quiz', {
-            videoTitle: currentVideo.title,
-            description: "Coding tutorial" 
-        });
-        setCurrentQuiz(data);
+      const { data } = await api.post('/ai/quiz', {
+        videoTitle: currentVideo.title,
+        description: "Coding tutorial",
+        videoId: currentVideo.youtubeId
+      });
+      setCurrentQuiz(data);
     } catch (error) {
-        console.error("Quiz Error:", error);
-        const errorMsg = error.response?.data?.message || "Error loading quiz";
-        setCurrentQuiz([{ question: errorMsg, options: ["Try Again"], correctAnswer: "Try Again" }]);
+      console.error("Quiz Error:", error);
+      const errorMsg = error.response?.data?.message || "Error loading quiz";
+      setCurrentQuiz([{ question: errorMsg, options: ["Try Again"], correctAnswer: "Try Again" }]);
     } finally {
-        setQuizLoading(false); 
+      setQuizLoading(false);
     }
   };
 
@@ -82,19 +83,19 @@ const GoalDetail = () => {
   const handleLevelUp = async () => {
     setTriggerConfetti(true);
     try {
-        // Mark video as done in the Goal (this also updates XP and stats in the backend)
-        const { data } = await api.patch(`/goals/${goal._id}/progress`, { videoId: currentVideo._id });
-        
-        // Note: XP and stats are updated server-side in goals.js, no need for separate call
+      // Mark video as done in the Goal (this also updates XP and stats in the backend)
+      const { data } = await api.patch(`/goals/${goal._id}/progress`, { videoId: currentVideo._id });
 
-        setGoal(data);
-        const nextVid = data.videos.find(v => v.isCurrent);
-        if (nextVid) {
-            setCurrentVideo(nextVid);
-            setFlashcards([]);
-        }
-    } catch (error) { 
-        console.error(error); 
+      // Note: XP and stats are updated server-side in goals.js, no need for separate call
+
+      setGoal(data);
+      const nextVid = data.videos.find(v => v.isCurrent);
+      if (nextVid) {
+        setCurrentVideo(nextVid);
+        setFlashcards([]);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -103,7 +104,8 @@ const GoalDetail = () => {
     try {
       const { data } = await api.post('/ai/flashcards', {
         videoTitle: currentVideo.title,
-        description: "Coding tutorial" 
+        description: "Coding tutorial",
+        videoId: currentVideo.youtubeId
       });
       setFlashcards(data);
     } catch (error) {
@@ -123,7 +125,7 @@ const GoalDetail = () => {
       // Update local state to reflect saved notes
       setGoal(prev => ({
         ...prev,
-        videos: prev.videos.map(v => 
+        videos: prev.videos.map(v =>
           v._id === currentVideo._id ? { ...v, notes: notesContent } : v
         )
       }));
@@ -133,7 +135,7 @@ const GoalDetail = () => {
   };
 
 
-  if (loading) return <Loader2 className="animate-spin w-8 h-8 m-auto text-blue-600"/>;
+  if (loading) return <Loader2 className="animate-spin w-8 h-8 m-auto text-blue-600" />;
   if (!goal) return <div>Goal not found</div>;
 
   return (
@@ -150,18 +152,18 @@ const GoalDetail = () => {
           {/* LEFT: Video & Tabs */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-black rounded-2xl overflow-hidden shadow-2xl aspect-video">
-               {currentVideo?.youtubeId ? (
-                   <VideoPlayer url={`https://www.youtube.com/watch?v=${currentVideo.youtubeId}`} onComplete={handleVideoComplete}/>
-               ) : <div className="text-white p-10">Video Unavailable</div>}
+              {currentVideo?.youtubeId ? (
+                <VideoPlayer url={`https://www.youtube.com/watch?v=${currentVideo.youtubeId}`} onComplete={handleVideoComplete} />
+              ) : <div className="text-white p-10">Video Unavailable</div>}
             </div>
 
             <div className="bg-white p-6 rounded-2xl border flex justify-between items-center">
               <div>
-                <h1 className="text-xl font-bold">{currentVideo?.title}</h1>
+                <h1 className="text-lg md:text-xl font-bold">{currentVideo?.title}</h1>
                 <span className="text-sm text-slate-500">{goal.completedVideos} / {goal.totalVideos} Completed</span>
               </div>
               <button onClick={handleVideoComplete} className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold flex gap-2">
-                {currentVideo?.watched ? <>Next <ChevronRight/></> : <>Complete <CheckCircle/></>}
+                {currentVideo?.watched ? <>Next <ChevronRight /></> : <>Complete <CheckCircle /></>}
               </button>
             </div>
 
@@ -173,23 +175,23 @@ const GoalDetail = () => {
 
               <div className="flex-1 bg-slate-50/50 p-6">
                 {activeTab === 'notes' ? (
-                   <NotesEditor note={currentVideo?.notes || ""} onSave={handleSaveNotes} />
+                  <NotesEditor note={currentVideo?.notes || ""} onSave={handleSaveNotes} />
                 ) : (
-                   <div className="flex flex-col items-center">
-                      {flashcards.length === 0 ? (
-                        <div className="text-center py-12">
-                           <Zap className="w-12 h-12 text-amber-500 mx-auto mb-4" />
-                           <h3 className="font-bold text-xl mb-2">Study Mode</h3>
-                           <button onClick={handleGenerateFlashcards} disabled={flashcardLoading} className="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold">
-                             {flashcardLoading ? "Generating..." : "Generate AI Flashcards"}
-                           </button>
-                        </div>
-                      ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                           {flashcards.map((c, i) => <Flashcard key={i} index={i} front={c.front} back={c.back} />)}
-                        </div>
-                      )}
-                   </div>
+                  <div className="flex flex-col items-center">
+                    {flashcards.length === 0 ? (
+                      <div className="text-center py-12">
+                        <Zap className="w-12 h-12 text-amber-500 mx-auto mb-4" />
+                        <h3 className="font-bold text-xl mb-2">Study Mode</h3>
+                        <button onClick={handleGenerateFlashcards} disabled={flashcardLoading} className="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold">
+                          {flashcardLoading ? "Generating..." : "Generate AI Flashcards"}
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                        {flashcards.map((c, i) => <Flashcard key={i} index={i} front={c.front} back={c.back} />)}
+                      </div>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
@@ -197,7 +199,7 @@ const GoalDetail = () => {
 
           {/* RIGHT: Roadmap */}
           <div className="lg:col-span-1">
-             <RoadmapView videos={goal.videos} currentVideoId={currentVideo?._id} onVideoSelect={(id) => setCurrentVideo(goal.videos.find(v => v._id === id))} />
+            <RoadmapView videos={goal.videos} currentVideoId={currentVideo?._id} onVideoSelect={(id) => setCurrentVideo(goal.videos.find(v => v._id === id))} />
           </div>
         </div>
       </div>
