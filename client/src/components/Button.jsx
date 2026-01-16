@@ -10,7 +10,6 @@ const Button = ({
   type = 'button' 
 }) => {
   
-  // Base styles: Flexbox, rounding, font, and the "Micro-interaction" bounce
   const baseStyles = "inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold transition-all active:scale-95 disabled:opacity-70 disabled:pointer-events-none";
   
   const variants = {
