@@ -10,7 +10,6 @@ export const userData = {
     videosCompleted: 28,
     quizzesAced: 15
   },
-  // Simple bar chart data: height percentage for Mon-Sun
   weeklyActivity: [40, 70, 20, 90, 60, 30, 80],
   dailyQuests: [
     { id: 1, title: "Watch 1 Video", completed: true },
@@ -51,15 +50,6 @@ export const coursesData = [
     completedVideos: 0,
     progress: 0,
     lastWatched: "Start Course",
-    locked: true // Example of a locked/not started course
+    locked: true 
   }
-];
-// ... (keep your existing userData and coursesData) ...
-
-export const leaderboardData = [
-  { rank: 1, name: "Sarah Connor", xp: 3200, avatar: "https://randomuser.me/api/portraits/women/44.jpg", isCurrentUser: false },
-  { rank: 2, name: "John Wick", xp: 2950, avatar: "https://randomuser.me/api/portraits/men/86.jpg", isCurrentUser: false },
-  { rank: 3, name: "Ambal", xp: 2450, avatar: "https://randomuser.me/api/portraits/men/32.jpg", isCurrentUser: true },
-  { rank: 4, name: "Ellen Ripley", xp: 2100, avatar: "https://randomuser.me/api/portraits/women/65.jpg", isCurrentUser: false },
-  { rank: 5, name: "Marty McFly", xp: 1800, avatar: "https://randomuser.me/api/portraits/men/12.jpg", isCurrentUser: false },
 ];
