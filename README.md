@@ -124,7 +124,7 @@ yt-focus/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/yt-focus.git
+   git clone https://github.com/prit-zalavadiya-78/yt-focus.git
    cd yt-focus
    ```
 
