@@ -120,7 +120,7 @@ const QuizModal = ({ isOpen, onClose, onPass, questions = [], loading }) => {
           )}
         </div>
 
-        {/* Footer (Fixed) */}
+        {/* Footer */}
         {!loading && (
           <div className="p-4 border-t border-slate-100 bg-slate-50 shrink-0">
             {result === 'fail' ? (
