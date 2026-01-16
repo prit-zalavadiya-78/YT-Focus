@@ -4,7 +4,6 @@ import { Save, FileText } from 'lucide-react';
 const NotesEditor = ({ note, onSave }) => {
   const [content, setContent] = useState(note || "");
 
-  // ✅ FIX: This forces the text box to update when you switch videos
   useEffect(() => {
     setContent(note || "");
   }, [note]);
