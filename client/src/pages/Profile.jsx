@@ -7,8 +7,6 @@ import {
   Trophy, Flame, Clock, Video, 
   Target, Calendar, TrendingUp, Loader2, ArrowLeft, BarChart3, Edit2, Award, Download, LogOut 
 } from 'lucide-react';
-
-// ✅ SAFE IMPORTS (Using relative paths to avoid alias errors)
 import { Progress } from "../components/ui/progress";
 import { Button } from "../components/ui/button";
 import {
@@ -91,7 +89,7 @@ const Profile = () => {
     try {
       const { data } = await api.put('/users/profile', editForm);
       setProfileData(data); 
-      login(data); // Update context
+      login(data); 
       setIsEditOpen(false);
     } catch (error) {
       alert("Failed to update profile");
