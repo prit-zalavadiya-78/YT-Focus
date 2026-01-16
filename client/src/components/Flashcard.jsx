@@ -49,9 +49,7 @@ const Flashcard = ({ front, back, index }) => {
              </div>
 
              {/* 2. Scrollable Content Area */}
-             {/* REMOVED: flex items-center justify-center (causes the cropping) */}
              <div className="flex-1 overflow-y-auto custom-scrollbar w-full relative">
-               {/* Wrapper to handle centering safely */}
                <div className="min-h-full flex items-center justify-center p-6 py-2">
                  <h3 className="text-lg font-semibold text-slate-700 leading-relaxed text-center">
                    {front}
@@ -79,7 +77,6 @@ const Flashcard = ({ front, back, index }) => {
 
              {/* 2. Scrollable Content Area */}
              <div className="flex-1 overflow-y-auto custom-scrollbar w-full relative">
-               {/* Wrapper to handle centering safely */}
                <div className="min-h-full flex items-center justify-center p-6 py-2">
                   <p className="text-sm md:text-base font-medium text-slate-200 leading-7 text-center">
                     {back}
