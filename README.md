@@ -139,7 +139,7 @@ yt-focus/
    Create a `.env` file in the `server` directory:
    ```env
    PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
+   MONGO_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret_key
    YOUTUBE_API_KEY=your_youtube_api_key
    GEMINI_API_KEY=your_google_ai_api_key
