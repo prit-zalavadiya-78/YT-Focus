@@ -45,7 +45,7 @@ router.post('/quiz', async (req, res) => {
 
     const prompt = `
       You are a Senior Technical Interviewer. 
-      Video: "${videoTitle}" (${description ? description.substring(0, 100) : ''}...).
+      Video: "${videoTitle}" (${description ? description.substring(0, 1000) : ''}...).
       
       Task: Create 3 HARD multiple choice questions.
       Output: PURE JSON Array only. No markdown.
