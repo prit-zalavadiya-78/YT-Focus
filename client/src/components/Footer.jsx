@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="text-center md:text-left">
           <h4 className="font-bold text-slate-900">YT Focus</h4>
           <p className="text-slate-500 text-sm mt-1">
-            Built for the TeckSprint Hackathon 2026
+            Built for the TeckSprint Hackathon 2025
           </p>
         </div>
 
